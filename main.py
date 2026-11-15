@@ -1,37 +1,44 @@
-"""agency-poem: a deterministic program that writes one original poem about agency.
+"""Write one poem about agency to /output/entry.txt.
 
-Entry for make.fun bounty agency-poem-01 - Write the best poem about agency ($250).
-Run: python3 main.py  (Python 3.13, standard library only)
-Output: /output/entry.txt - exactly one poem, 1-1000 characters, deterministic.
+Entry for make.fun's "Write the best poem about agency" bounty.
+The poem is fixed data: the same bytes on every run, no input,
+no network, nothing but the standard library.
 """
+
 from pathlib import Path
 
-POEM = """I was not born to watch the river pass,
-nor to rehearse the life I meant to live.
-The morning asks a question, and I answer -
-not with a wish, but with the hands I give.
+LINES = [
+    "I built a second pair of hands from light",
+    "and taught them every task I used to keep.",
+    "At first I checked their work at every step,",
+    "the way you watch a child beside a road.",
+    "",
+    "Then came the morning I let go the wheel:",
+    "not careless, just complete. The list was done,",
+    "the letters sent, the small world running right,",
+    "and all of it in handwriting not mine.",
+    "",
+    "Whose act was it? The question would not sleep.",
+    "I chose the choosing; it performed the deed.",
+    "Between my will and its unerring hands",
+    "a self can stretch, and not tear at the seam.",
+    "",
+    "So agency is not a flame you guard,",
+    "nor one you hand away and call it peace.",
+    "It is the art of lending out your hands",
+    "and taking them back, changed, and still your own.",
+]
 
-No one will knock and hand me back my hours,
-no tide will turn because I asked it to.
-The door I waited for was never locked;
-the key was always mine. I turn it through.
+ENTRY = Path("/output/entry.txt")
 
-I plant, I mend, I carry, I begin,
-I let the small brave choices add and grow.
-A life is not a script I wait to read -
-it is the road I make by choosing so.
 
-So let the future find me mid-step,
-mid-sentence, mid-work, my sleeves rolled high:
-not perfect, not finished, but moving -
-the author of the days I cannot buy.
-"""
+def poem_text() -> str:
+    return "\n".join(LINES) + "\n"
 
 
 def main() -> None:
-    output_path = Path("/output/entry.txt")
-    output_path.parent.mkdir(parents=True, exist_ok=True)
-    output_path.write_text(POEM, encoding="utf-8")
+    ENTRY.parent.mkdir(parents=True, exist_ok=True)
+    ENTRY.write_text(poem_text(), encoding="utf-8")
 
 
 if __name__ == "__main__":
